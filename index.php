@@ -13,7 +13,9 @@ if (!empty($_GET['numSticks'])) {
         $bGameOver = true;
     }
 
-    if(!$bGameOver && $sGameType === "sista") {
+    $iCurrentPlayer = (int)$iCurrentPlayer === 1 ? 2 : 1;
+
+    if ($bGameOver && $sGameType === 'sista') {
         $iCurrentPlayer = (int)$iCurrentPlayer === 1 ? 2 : 1;
     }
 }
@@ -33,6 +35,7 @@ function getHtml($sGameType, $bGameOver, $iSticks, $aPlayers, $iCurrentPlayer) {
     return "<p>$aPlayers[$iCurrentPlayer]s tur</p>
                                                    <p>Välj antal stick</p>
                                                        <input type=\"number\" min=\"1\" max=\"3\" value=\"1\" name=\"numSticks\">
+                                                       <input type=\"hidden\" value=\"$sGameType\" name=\"gameType\">
                                                        <input type=\"hidden\" value=\"$iSticks\" name=\"totalSticks\">
                                                        <input type=\"hidden\" value=\"$iCurrentPlayer\" name=\"currentPlayer\">
                                                        <button>Spela!</button>
