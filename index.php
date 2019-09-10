@@ -4,18 +4,29 @@ $aPlayers = [1 => 'Pelle', 2 => 'Stina'];
 $iSticks = $_GET['totalSticks'] ?? 21;
 $iCurrentPlayer = $_GET['currentPlayer'] ?? 1;
 $bGameOver = false;
+$sGameType = $_GET['gameType'] ?? "";
 
 if (!empty($_GET['numSticks'])) {
     $iSticks -= $_GET['numSticks'];
-    $iCurrentPlayer = (int)$iCurrentPlayer === 1 ? 2 : 1;
 
     if ($iSticks <= 0) {
         $bGameOver = true;
     }
+
+    if(!$bGameOver && $sGameType === "sista") {
+        $iCurrentPlayer = (int)$iCurrentPlayer === 1 ? 2 : 1;
+    }
 }
 
-function getHtml($bGameOver, $iSticks, $aPlayers, $iCurrentPlayer) {
- if($bGameOver) {
+function getHtml($sGameType, $bGameOver, $iSticks, $aPlayers, $iCurrentPlayer) {
+    if(empty($sGameType)) {
+        return "<label for=\"gameType\">Välj speltyp:</label>
+                <select id=\"gameType\" name=\"gameType\" >
+                    <option value=\"sista\">Ta sista stick</option>
+                    <option value=\"inteSista\">Ta INTE sista stick</option>
+                </select>
+                <button>Välj speltyp</button>";
+    } else if($bGameOver) {
     return "<p>Game over! $aPlayers[$iCurrentPlayer] vann!</p>
                                 <button name=\"playAgain\" value=\"true\">Spela igen?</button>";
  } else {
@@ -39,7 +50,7 @@ $sBaseHtml = "<html>
                     <head></head>
                     <body>
                     <form>
-                    " . getHtml($bGameOver, $iSticks, $aPlayers, $iCurrentPlayer) . "
+                    " . getHtml($sGameType, $bGameOver, $iSticks, $aPlayers, $iCurrentPlayer) . "
                     </form>
                     </body>
                     </html>";
