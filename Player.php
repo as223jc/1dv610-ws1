@@ -6,7 +6,7 @@ class Player {
     private $name;
 
     public function getName() {
-        return $this->$name;
+        return $this->name;
     }
 
     public function __construct(string $name) {
