@@ -9,10 +9,13 @@ class Game {
 
     public function __construct($players) {
         $this->players = $players;
-        
     }
 
-    function removeSticks($numberOfSticks) {
-        $this->sticks -= $numberOfSticks 
+    public function removeSticks(int $numberOfSticks) {
+        $this->sticks -= $numberOfSticks;
+    }
+
+    public function toString() {
+        return $this->sticks;
     }
 }

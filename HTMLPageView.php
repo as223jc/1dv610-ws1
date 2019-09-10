@@ -80,7 +80,7 @@ class HTMLPageView {
 				<title>$this->title</title>
 			</head>
 			<body>
-				<h1>hello</h1>
+				<h1>$this->title</h1>
 				$this->bodyHTML
 			</body>
 		</html>";
