@@ -6,14 +6,13 @@ error_reporting(E_ALL);
 require_once("HTMLPageView.php");
 require_once("Player.php");
 require_once("Game.php");
+session_start();
 
 $title = "Sticks";
 
 $_SESSION['players'] = [1 => new Player('Pelle'), 2 => new Player('Stina')];
 
-$_SESSION['game'] = new Game($_SESSION['players']);
-
-session_start();
+$_SESSION['game'] = new Game($_SESSION['players']); // HUR STORA DENNA I SESSION?? Skapas ny varje gång!!
 
 $numberOfSticks = $_GET['numberOfSticks'] ?? 0;
 
